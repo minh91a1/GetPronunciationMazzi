@@ -1,0 +1,24 @@
+﻿<Window x:Class="GetPronunciationMazzi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GetPronunciationMazzi"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="651.801" Width="919.492">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBox Name="words" HorizontalAlignment="Left" Height="104" AcceptsReturn="True" Margin="10" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" VerticalScrollBarVisibility="Visible"/>
+            <Button Content="Start" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Center" Width="155" Height="60"
+                Click="Button_Click"/>
+            <TextBox Name="pronounciation" HorizontalAlignment="Right" AcceptsReturn="True" Height="104" Margin="10" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" VerticalScrollBarVisibility="Visible"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <WebBrowser Name="web" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+        </Grid>
+    </Grid>
+</Window>

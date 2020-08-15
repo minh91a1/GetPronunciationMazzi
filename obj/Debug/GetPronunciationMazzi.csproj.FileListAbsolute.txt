@@ -1,0 +1,15 @@
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\bin\Debug\GetPronunciationMazzi.exe.config
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\bin\Debug\GetPronunciationMazzi.exe
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\bin\Debug\GetPronunciationMazzi.pdb
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi.csprojResolveAssemblyReference.cache
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\MainWindow.g.cs
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\App.g.cs
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi_MarkupCompile.cache
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi_MarkupCompile.lref
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\MainWindow.baml
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi.g.resources
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi.Properties.Resources.resources
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi.csproj.GenerateResource.Cache
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi.csproj.CoreCompileInputs.cache
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi.exe
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Debug\GetPronunciationMazzi.pdb
