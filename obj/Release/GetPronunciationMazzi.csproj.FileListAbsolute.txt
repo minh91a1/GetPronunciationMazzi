@@ -12,3 +12,7 @@ G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Release\GetPronu
 G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Release\GetPronunciationMazzi.csproj.CoreCompileInputs.cache
 G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Release\GetPronunciationMazzi.exe
 G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Release\GetPronunciationMazzi.pdb
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\bin\Release\log4net.dll
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\bin\Release\log4net.xml
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\obj\Release\GetPronunciationMazzi.csprojResolveAssemblyReference.cache
+G:\VisualStudioProject\2020\MiniTools\GetPronunciationMazzi\bin\Release\log4net.config

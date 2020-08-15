@@ -8,15 +8,30 @@
         Title="MainWindow" Height="651.801" Width="919.492">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <TextBox Name="words" HorizontalAlignment="Left" Height="104" AcceptsReturn="True" Margin="10" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" VerticalScrollBarVisibility="Visible"/>
-            <Button Content="Start" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Center" Width="155" Height="60"
-                Click="Button_Click"/>
-            <TextBox Name="pronounciation" HorizontalAlignment="Right" AcceptsReturn="True" Height="104" Margin="10" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" VerticalScrollBarVisibility="Visible"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Button Content="Open CSV File" HorizontalAlignment="Left" Height="60" VerticalAlignment="Center" Margin="10" Width="120"
+                    Click="Get_FileCSV_Button_Click"></Button>
+                <Button Content="Start" HorizontalAlignment="Left" Margin="0 10 10 10" VerticalAlignment="Center" Width="155" Height="60"
+                Click="Get_Pronounciation_Button_Click"/>
+                <TextBlock Name="status" VerticalAlignment="Center">Hello~</TextBlock>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Button Content="Export To CSV" HorizontalAlignment="Right" Margin="10 10 10 10" VerticalAlignment="Center" Width="155" Height="60"
+                Click="Export_To_CSV_Button_Click"/>
+            </Grid>
         </Grid>
+        
         <Grid Grid.Row="1">
             <WebBrowser Name="web" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
         </Grid>
