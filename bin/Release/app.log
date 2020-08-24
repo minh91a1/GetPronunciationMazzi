@@ -16,3 +16,9 @@
 2020-08-15 17:34:22,439 [1] INFO GetPronunciationMazzi.MainWindow - Finish Open file dialog
 2020-08-15 17:36:18,984 [1] INFO GetPronunciationMazzi.MainWindow - Init Open file dialog
 2020-08-15 17:36:18,984 [1] INFO GetPronunciationMazzi.MainWindow - Show Open file dialog
+2020-08-16 22:48:55,661 [1] INFO GetPronunciationMazzi.App -         =============  Started Logging  =============        
+2020-08-16 22:48:55,851 [1] INFO GetPronunciationMazzi.MainWindow - Welcome?
+2020-08-16 22:48:59,971 [1] INFO GetPronunciationMazzi.MainWindow - Loaded Previous Pronounciation file: summonnight-Mazii_pronounciation.csv
+2020-08-16 22:49:07,210 [1] INFO GetPronunciationMazzi.MainWindow - Loaded file: summonnight-Mazii.csv
+2020-08-16 22:49:10,652 [1] INFO GetPronunciationMazzi.MainWindow - Processing...
+2020-08-16 22:49:31,097 [1] INFO GetPronunciationMazzi.MainWindow - ----- Finish ------
