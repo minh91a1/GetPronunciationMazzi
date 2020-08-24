@@ -115,5 +115,11 @@
   <ItemGroup>
     <Resource Include="Dapino-Summer-Holiday-Palm-tree.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="nishimiya.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="sky.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

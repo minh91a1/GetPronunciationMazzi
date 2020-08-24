@@ -25,14 +25,15 @@ namespace GetPronunciationMazzi
     public static class Status
     {
         public static string Error = "Error";
-        public static string ErrorNothingToDo = "There is no new word to get pronounciation ♥";
+        public static string ErrorNothingToDo = "There is no new word to get pronounciation";
         public static string ErrorLoadCSVFirst = "Please Load CSV File First";
 
-        public static string DoingNothing = "Doing Nothig ~";
+        public static string DoingNothing = "Doing Nothing ~";
         public static string Processing = "Processing...";
+        public static string FinishingLastWork = "Finishing Last Work... (Please wait ^^)";
         public static string LoadCVSDone = "Load CSV Successful";
 
-        public static string CompleteGetPronounciation = "Get Pronuonciation Completed!";
+        public static string CompleteGetPronounciation = @"Get Pronuonciation Completed \(^▼^)/";
         public static string CompleteExportCSV = "Export CSV Completed!";
     }
 
@@ -62,7 +63,7 @@ namespace GetPronunciationMazzi
         private string currentLink;
 
         private IList<Word> dictionary;
-        private IList<Word> previousPronounciations = new List<Word>();
+        private IList<Word> ignoreWordsTxtBlock = new List<Word>();
         private IList<Word> neverGetPronounciations;
 
         private int _total = 0;
@@ -75,7 +76,7 @@ namespace GetPronunciationMazzi
             InitializeComponent();
 
             web.LoadCompleted += _web_Navigated;
-            status.Text = Status.DoingNothing;
+            SetStatus(Status.DoingNothing);
             LOG("Welcome♪");
         }
 
@@ -251,7 +252,9 @@ namespace GetPronunciationMazzi
 
                 activeX.Silent = true;
 
-                status.Text = Status.CompleteGetPronounciation;
+                SetStatus(Status.CompleteGetPronounciation);
+                startBtn.Content = "Start";
+
                 LOG("----- Finish ------");
 
                 return;
@@ -260,15 +263,23 @@ namespace GetPronunciationMazzi
             currentLink = links.Dequeue();
             web.Navigate(currentLink);
 
-            status.Text = Status.Processing + " " + Math.Round(100*((double)(_total - links.Count)/_total), 0) + "%";
+            SetStatus(Status.Processing + " " + Math.Round(100*((double)(_total - links.Count)/_total), 0) + "%");
         }
 
         private void Get_Pronounciation_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (status.Text.IndexOf(Status.Processing) == 0)
+            {
+                startBtn.Content = "Start";
+                SetStatus(Status.FinishingLastWork);
+                links.Clear();
+                return;
+            }
+
             links?.Clear();
 
             neverGetPronounciations = (from d in dictionary
-                                       join p in previousPronounciations
+                                       join p in ignoreWordsTxtBlock
                                        on d.Value equals p.Value into dp
                                        from j in dp.DefaultIfEmpty()
                                        where j == null
@@ -283,15 +294,18 @@ namespace GetPronunciationMazzi
 
             if (links.Count == 0)
             {
+                SetStatus(Status.ErrorNothingToDo);
                 LOG(Status.ErrorNothingToDo);
                 return;
             }
 
+            startBtn.Content = "Stop";
+
             currentLink = links.Dequeue();
             web.Navigate(currentLink);
 
-            status.Text = Status.Processing;
-            LOG(status.Text);
+            SetStatus(Status.Processing);
+            LOG(Status.Processing);
         }
 
         private void Get_FileCSV_Button_Click(object sender, RoutedEventArgs e)
@@ -315,8 +329,11 @@ namespace GetPronunciationMazzi
                         }).ToList();
 
                     csv_source_file_name = browseDialog.FileName;
-                    status.Text = Status.LoadCVSDone;
-                    LOG("Loaded file: " + System.IO.Path.GetFileName(browseDialog.FileName));
+                    SetStatus(Status.LoadCVSDone);
+                    csvFileName.Text = csv_source_file_name;
+                    csvFileName.Foreground = new SolidColorBrush(Colors.DeepSkyBlue);
+
+                    LOG("Loaded file: " + System.IO.Path.GetFileName(browseDialog.FileName) + " ►► Total: " + dictionary.Count + " word(s)");
                 }
             }
             catch (Exception ex)
@@ -325,7 +342,7 @@ namespace GetPronunciationMazzi
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Console.Write(ex);
 
-                status.Text = Status.Error + ":" + ex.Message;
+                SetStatus(Status.Error + ":" + ex.Message);
             }
         }
 
@@ -333,33 +350,55 @@ namespace GetPronunciationMazzi
         {
             if (string.IsNullOrWhiteSpace(csv_source_file_name))
             {
-                status.Text = Status.ErrorLoadCSVFirst;
+                SetStatus(Status.ErrorLoadCSVFirst);
                 return;
             }
 
             var newFileCSVPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(csv_source_file_name),System.IO.Path.GetFileNameWithoutExtension(csv_source_file_name) + "_pronounciation.csv");
 
+            var successGetPronounciationCount = 0;
             var csv = new StringBuilder();
-            foreach (var item in dictionary)
+            foreach (var item in neverGetPronounciations)
             {
+                if (string.IsNullOrWhiteSpace(item.Pronunciation))
+                {
+                    continue;
+                }
+
                 var link = $"<a href=\"{item.Link}\">mazzi.net</a>";
                 var newLine = $"{item.Value}\t「{item.Pronunciation}」{item.HanViet}<br>{item.Meaning}<br><br>{item.Comment}<br>{link}";
                 csv.AppendLine(newLine);
+                successGetPronounciationCount++;
             }
 
             File.WriteAllText(newFileCSVPath, csv.ToString());
 
-            status.Text = Status.CompleteExportCSV;
-            LOG(status.Text);
+            SetStatus(Status.CompleteExportCSV);
+            LOG(Status.CompleteExportCSV + " ►► Exported: " + successGetPronounciationCount + " word(s)");
         }
 
         private void LOG(string content)
         {
             logBox.Text += (content + "\n");
+            logBox.ScrollToEnd();
             log.Info(content);
         }
 
-        private void Input_Previous_Pronounciation_File(object sender, RoutedEventArgs e)
+        private void SetStatus(string text)
+        {
+            status.Text = text;
+
+            if (text.Equals(Status.FinishingLastWork))
+            {
+                status.Foreground = new SolidColorBrush(Colors.OrangeRed);
+            }
+            else
+            {
+                status.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+
+        private void Input_Ignore_Words_File(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -370,14 +409,17 @@ namespace GetPronunciationMazzi
                 // Verification
                 if (browseDialog.ShowDialog() == true)
                 {
-                    previousPronounciations = File.ReadAllLines(browseDialog.FileName)
+                    ignoreWordsTxtBlock = File.ReadAllLines(browseDialog.FileName)
                         .Select(x => new Word
                         {
                             Value = x.Split('\t')[0],
                         }).ToList();
 
-                    status.Text = Status.LoadCVSDone;
-                    LOG("Loaded Previous Pronounciation file: " + System.IO.Path.GetFileName(browseDialog.FileName));
+                    SetStatus(Status.LoadCVSDone);
+                    ignoreFileNameTxbBlock.Text = browseDialog.FileName;
+                    ignoreFileNameTxbBlock.Foreground = new SolidColorBrush(Colors.OrangeRed);
+
+                    LOG("Loaded Ignore Words file: " + System.IO.Path.GetFileName(browseDialog.FileName));
                 }
             }
             catch (Exception ex)
@@ -386,8 +428,22 @@ namespace GetPronunciationMazzi
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Console.Write(ex);
 
-                status.Text = Status.Error + ":" + ex.Message;
+                SetStatus(Status.Error + ":" + ex.Message);
             }
+        }
+
+        private void clearCSVFile_Click(object sender, RoutedEventArgs e)
+        {
+            dictionary?.Clear();
+            csvFileName.Text = "CSV File Name here ...";
+            csvFileName.Foreground = new SolidColorBrush(Colors.DarkGray);
+        }
+
+        private void clearIgnoreFile_Click(object sender, RoutedEventArgs e)
+        {
+            ignoreWordsTxtBlock?.Clear();
+            ignoreFileNameTxbBlock.Text = "Ignore words File Name here ...";
+            ignoreFileNameTxbBlock.Foreground = new SolidColorBrush(Colors.DarkGray);
         }
     }
 }

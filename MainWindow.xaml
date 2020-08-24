@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="651.801" Width="919.492">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/sky.jpg" Stretch="UniformToFill" Opacity="0.7"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
@@ -15,32 +19,63 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Button Content="Input CSV File" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 10 10 0" Width="120"
+                    Click="Get_FileCSV_Button_Click"></Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Content="Ignore words" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 10 10 0" Width="120"
+                    Click="Input_Ignore_Words_File"></Button>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <TextBlock Name="csvFileName" Padding="10 0" Margin="10 10 10 0" Foreground="DarkGray" Background="White">CSV File Name here ...</TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <TextBlock Name="ignoreFileNameTxbBlock" Padding="10 0" Margin="10 10 10 0" Foreground="DarkGray" Background="White">Ignore words File Name here ...</TextBlock>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Button Name="clearCSVFile" Margin="10 10 10 0" Click="clearCSVFile_Click" Padding="10 0">Remove</Button>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Button Name="clearIgnoreFile" Margin="10 10 10 0" Click="clearIgnoreFile_Click" Padding="10 0">Remove</Button>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0">
-                <Button Content="Open CSV File" HorizontalAlignment="Left" Height="60" VerticalAlignment="Center" Margin="10" Width="120"
-                    Click="Get_FileCSV_Button_Click"></Button>
-                <Button Content="Input Previous Pronounciation" HorizontalAlignment="Left" Height="60" VerticalAlignment="Center" Margin="0 10 10 10" Width="200"
-                    Click="Input_Previous_Pronounciation_File"></Button>
-                <Button Content="Start" HorizontalAlignment="Left" Margin="0 10 10 10" VerticalAlignment="Center" Width="155" Height="60"
+                <Button Name="startBtn" Content="Start" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" Width="155" Height="60"
                 Click="Get_Pronounciation_Button_Click"/>
-                <TextBlock Name="status" VerticalAlignment="Center">Hello~</TextBlock>
+                <TextBlock Name="status" VerticalAlignment="Center" FontWeight="Bold" FontSize="14">Hello~</TextBlock>
             </StackPanel>
 
             <Grid Grid.Column="1">
-                <Button Content="Export To CSV" HorizontalAlignment="Right" Margin="10 10 10 10" VerticalAlignment="Center" Width="155" Height="60"
+                <Button Content="Export To CSV" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" Width="155" Height="60"
                 Click="Export_To_CSV_Button_Click"/>
             </Grid>
         </Grid>
         
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <WebBrowser Name="web" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
         </Grid>
 
-        <Grid Grid.Row="2">
-            <TextBox Name="logBox" Height="80" Margin="10" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <Grid Grid.Row="3">
+            <TextBox Name="logBox" Height="80" Margin="10" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Opacity="0.5"/>
         </Grid>
     </Grid>
 </Window>
